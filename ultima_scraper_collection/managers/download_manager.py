@@ -37,12 +37,20 @@ class DownloadManager:
         )
 
     async def bulk_download(self):
-        final_list: list[MediaMetadata] = [
-            self.download(media_item)
-            for download_item in self.content_list
-            for media_item in download_item.medias
-        ]
-        _result = await asyncio.gather(*final_list, return_exceptions=True)
+        # final_list: list[MediaMetadata] = [
+        #     self.download(media_item)
+        #     for download_item in self.content_list
+        #     for media_item in download_item.medias
+        # ]
+        for download_item in self.content_list:
+            print(download_item)
+            for media_item in download_item.medias:
+                print("\n")
+                print(vars(media_item))
+                print("\n")
+        # _result = await asyncio.gather()
+        # exit(0)
+        # _result = await asyncio.gather(*final_list, return_exceptions=True)
 
     async def drm_download(self, download_item: MediaMetadata):
         content_metadata = download_item.__content_metadata__
