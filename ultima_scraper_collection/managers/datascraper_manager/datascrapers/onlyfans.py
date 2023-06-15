@@ -59,7 +59,7 @@ class OnlyFansDataScraper(StreamlinedDatascraper):
             print("Ignoring - ", f"PostID: {content_metadata.content_id}")
             return {}
         for asset in content_metadata.medias:
-            if asset.urls:
+            if asset.urls and 'users_documents' not in asset.urls[0]:
                 reformat_manager = ReformatManager(authed, self.filesystem_manager)
                 reformat_item = reformat_manager.prepare_reformat(asset)
                 file_directory = reformat_item.reformat(
